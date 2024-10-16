@@ -1,0 +1,20 @@
+Date: 10/16
+
+%eax 
+%edx        15
+%ecx        7
+
+    leal 100(%edx,%ecx, 2), %eax    ; EAX = 129 = 100 + 15 + 7 * 2
+
+%eax        10 
+%ebx        2
+
+    addl %eax, %ebx             ; EBX = 2 + 10      EBX+=EAX
+
+    subl %eax, %ebx             ; EBX = 2 - 10      EBX-=EAX 
+
+    sdivl %ebx, %eax            ; EAX = 10 / 2      
+
+    movl %ebx, %ecx             ; ECX = EBX         ECX = 2
+    sdivl %eax, %ecx            ; ECX /= EAX        ECX = 10/2 = 5
+

@@ -1,0 +1,133 @@
+Lecture 4
+Divide and Conquer Matrix Multiplication
+Time Complexity: T(n) = 8T(n/2) + O(n^2) -> O(n^3)
+8T(n/2) comes from the 8 recursive matrix multiplications
+    A = [A11, A21, A12, A22]          B = [B11, B21, B12, B22]
+    C = [C11, C21, C12, C22] 
+      = [𝐴11 × 𝐵11 + 𝐴12 × 𝐵21, 𝐴11 × 𝐵12 + 𝐴12 × 𝐵22, 𝐴21 × 𝐵11 + 𝐴22 × 𝐵21, 𝐴21 × 𝐵12 + 𝐴22 × 𝐵22]
+O(n^2) accounts for the cost of adding the matrices -> work done at each level
+    There are n x n = n^2 elements in each matrix -> n^2 additions
+____________________
+Straseen's Algorithm
+Time Complexity: T(n) = 7T(n/2) + O(n^2) -> O(log_2(7)) -> O(n^2.81)
+7T(n/2) because there are only 7 multiplications needed
+____________________
+3 Cases for calculating Time Complexity
+    1. Work at each level is constant -> 
+        ex. T(n) = 2T(n/2) + O(n) = O(nlogn)
+    2. Work at each level decreases geometrically -> Topmost work done (at the root)
+        ex. T(n) = 2T(n/2) + O(n^2) = O(n^2)
+    3. Work at each level increases geometrically -> Amount of work done at the lowest level
+        ex. 
+____________________
+____________________
+
+Lecture 5
+Tower of Hanoi
+How can we move a tower of n disks from one peg to another, using a third square peg as an occasional placeholder, without ever placing a disk on top of a smaller disk?
+Recusion: T(n) = 2T(n-1) + 1 -> T(n) = 2^n - 1
+    Base Case: T(1) = 1one disk, so move it directly from source peg to target peg
+    Recursive Step:
+        * Move the top n-1 disk to an auxiliry peg (this takes T(n-1) moves)
+        * Move the largest disk (the n-th disk) to the target peg (this takes +1 move)
+        * Move the n-1 disks from the auxiliary peg to the target peg (this takes T(n-1) moves)
+
+    T(n) = 2T(n-1)+1 = 2(2T(n-2)+1)+1 = 4T(n-2)+3
+         = 2^k T(n-k) + (2^k-1)
+    Note that when k=n-1, T(1) = 1,
+         = 2^(n-1) * 1 + 2^(n-1)-1 = 2^n - 1
+____________________
+Given a list of integers, how long does it take to find if an integer is in the list?
+    No structure, so O(n).
+
+Given a sorted list of integers, how long does it take to find if an integer is in the list?
+    Use Binary Search (Divide and Conquer), so O(logn).
+
+Two-Sum Problem
+Given an array of integers and an integer target, return indices of the two numbers such that they add up to the target.
+    Naive Approach: O(n^2) -> check every pair A[i] + A[j] = T
+    Better Algorithm: O(n) -> linear scan after sorting
+        left <- 0
+        right <- n-1
+        while(left < right)
+        if A[left] + A[right] = T
+            return pair(left,right)
+        if A[left] + A[right] < T
+            left <- left + 1
+        if A[left] + A[right] > T
+            right <- right - 1
+
+Three-Sum Problem iterates through two-sum problem n times
+____________________
+Finding Max Profit
+Input: Array 𝑃[0 . . . 𝑛 − 1] of length 𝑛
+Output: Max {𝑃[𝑗] − 𝑃[𝑖]} over all pairs 𝑖, 𝑗 with 𝑗 > 𝑖. If
+𝑃[𝑗] − 𝑃[𝑖] is always negative then output 0 (don’t buy).
+    Naive Approach: O(n^2) -> Try all pairs (i,j)
+    Better Algorithm: T(n) = 2T(n/2) + O(n) -> O(nlogn)
+        if len(P) = 1
+            return 0
+        P1 ← 𝑃[0], ... , 𝑃[𝑛/2 − 1]         # prices from first half
+        𝑃2 ← 𝑃[ 𝑛/2 ], ... , 𝑃[𝑛 − 1]       # prices from last half
+        𝑥1 ← MaxProfit(𝑃1)                  # recursively calc max profit in first half
+        𝑥2 ← MaxProfit(𝑃2)                  # recursively calc max profit in second half
+        𝑥3 ← FindMax(𝑃2) − FindMin(𝑃1)      # case when buy in first half and sell in second half
+        return max{ 𝑥1 , 𝑥2 , 𝑥3 }          # return the max of the 3 cases
+
+        // notes
+        O(n) -> breaking the array down
+             -> finding the minimum in the first half and the maximum in the second half required scanning both halves, which is O(n)
+        T(n/2) -> solving each sub problem (2T(n/2))
+
+
+    Even Better Algorithm: T(n) = 2T(n/2) + 1 -> O(n)
+        if (len(𝑃) = 1)
+            return 0, 𝑃[0], 𝑃[0]                # no profit b/c buy & sell same day
+        𝑃1 ← 𝑃[0], ... , 𝑃[ 𝑛/2 − 1]            # first half
+        𝑃2 ← 𝑃[ 𝑛/2 ], ... , 𝑃[𝑛 − 1]           # second half
+        PRFT1 , 𝑀𝑁1 , 𝑀𝑋1 ← MaxProfitX(𝑃1)     # recursively calc max profit and max/min prices in first half
+        PRFT2 , 𝑀𝑁2 , 𝑀𝑋2 ← MaxProfitX(𝑃2)     # recursively calc max profit and max/min prices in second half
+        PRFT3 ← 𝑀𝑋2 − 𝑀𝑁1                      # case when buy in first half and sell in second half
+        PRFT ← max {PRFT1 , PRFT2 , PRFT3 }     # overall profit is the max of the 3 cases
+        𝑀𝑋 ← max {𝑀𝑋1 , 𝑀𝑋2 }                 # global max 
+        𝑀𝑁 ← min {𝑀𝑁1 , 𝑀𝑁2 }                 # global min
+        Return PRFT, 𝑀𝑁 , 𝑀𝑋                   # return max profit, overall min & overall max
+
+        // notes
+        𝑀𝑋 ← max {𝑀𝑋1 , 𝑀𝑋2 } AND 𝑀𝑁 ← min {𝑀𝑁1 , 𝑀𝑁2 }
+            require comparing a constant number of elements (i.e., 2 comparisons for the min and 2 for the max), which is O(1)
+
+____________________
+Selection Program
+Problem: Select the 𝑘-th smallest element in an array of size 𝑛.
+Applications: Find the median, top quantiles, etc.
+    Algorithm: T(n) = O(n)
+    SELECT(A,k)
+        p <- ChoosePivot(A)                         # find the median of array A
+        A1, A2 <- Partition(A,p)                    # partition the array > and < m (where the k-th smallest element could potentially lie)
+        recur based on k:                           # check the value of k
+            if k<len(A1) + 1                        # kth smallest element lies in the first half of the array, A1, so recursively find the k-th smallest element in A1
+                return Select(A1,k)
+            if k=len(A1) + 1                        # kth smallest element is exactly the middle m, so we are done 
+                return p                            
+            if k>len(A1) + 1                        # kth smalles element lies int he second half of the array, A2, so recursively find k'=k-[n/2] element in A2 (the first n/2 elements are accounted for)
+                return Select(A2, k-len(a1)-1) 
+    
+    // notes
+    A1 contains all elements less than the median m
+    A2 contains all elements greater than the median m
+
+    Median of Medians: T(n) = T(n/5) + T(7n/10) + O(n) = O(n)
+        split A into groups of 5                    # takes O(n) to partition into smaller groups
+        recusively find the median of each group    # sorting 5 elements is constant time O(1) -> sorting all n/5 groups takes O(n) 
+                                                    # after sorting find the median of each group & collect in array M (M will contain n/5 elements)
+        recursively find the median of medians      # apply median of medians on M to find median of medians is T(n/5) since it reduces the size to n/5 each time
+        partition around the median of medians      # median of medians used as pivot to partition original array A into elements > and < pivot -> takes O(n)
+        recur on the appropriate side               # if the pivot is the median, return it
+                                                    # otherwise, decide which half to recurse on -> takes T(n/2) since each step halves the size
+
+    
+    Time Complexity: T(n) = T(n/5) + T(7n/10)
+        Deriving T(n/5)
+
+        Deriving 

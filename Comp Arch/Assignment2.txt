@@ -1,0 +1,127 @@
+first column is always 1
+if matrix has 5 attributes, then there are 6 columns total
+goal is to find the weights
+
+a = number of attributes
+h = number of houses
+
+X: h * (a+1)
+
+Y: h * 1
+
+W: (a+1) * 1
+
+X^t: (a+1) * h
+
+X^t * X: (a+1) * (a+1)
+
+XtXi : (a+1) * (a+1)
+
+XtXi*X^t: (a+1) * h
+
+functions for:
+multiplication
+transpose
+inverse
+allocation
+deallocation
+initialize identity matrix
+
+    - choose a representation for your matrices
+
+struct matrix{
+    unsigned rows;
+    unisgned cols;
+    double **data
+};
+
+multiply(matrix *out, matrix*a, matrix*b);      // out = a * b
+transpose(matrix *out, matrix*in);              // out = transpose(in)
+inverse(matrix *out, matrix *in);               // out = inverse(in)
+
+
+
+
+A =     a b c
+        d e f
+
+A^t =   a d 
+        b e 
+        c f 
+
+
+a b c d 
+e f g h 
+i j k l 
+m n o p 
+
+X 
+    1 a b c 
+    1 e f g 
+    1 i j k 
+    1 m n o 
+
+Y 
+    d 
+    h 
+    l 
+    p 
+
+
+// if you're testing you can rename your main and make a new main then change name back after
+int real_main(...) {
+
+}
+
+int main(...) {
+
+}
+
+-> use fscanf since you know how many you are going to read
+
+# define DEBUG 0
+if (DEBUG) print_matrix(x)
+
+# finding inverse explained
+Ex.
+    2 0     1 0
+    0 4     0 1
+
+    1 0     0.5 0
+    0 4     0   1
+
+    1 0     0.5 0
+    0 1     0   0.25
+
+A       = 2 0
+          0 4
+
+A^-1    = 0.5 0
+          0   0.25
+
+Ex.
+2 1 1       1 0 0
+0 5 1       0 1 0
+1 1 2       0 0 1
+
+1   0.5 0.5   0.5 0    0
+0   5   1     0   1    0
+1   1   2     0   0    1
+
+1 0.5 0.5     0.5 0    0
+0 5   1       0   1    0
+0 0.5 1.5    -0.5 0    1
+
+1 0.5 0.5     0.5 0    0
+0 1   0.2     0   0.2  0
+0 0.5 1.5    -0.5 0    1
+
+1 0.5 0.5     0.5 0    0
+0 1   0.2     0   0.2  0
+0 0   1.4    -0.5 -0.1 1
+
+1 0.5 0.5     0.5    0     0
+0 1   0.2     0      0.2   0
+0 0   1      -0.36  -0.07 -0.71
+
+// will not be given inputs that cannot be inverted (ie. linerly dependent matrices)
