@@ -127,7 +127,10 @@ Applications: Find the median, top quantiles, etc.
                                                     # otherwise, decide which half to recurse on -> takes T(n/2) since each step halves the size
 
     
-    Time Complexity: T(n) = T(n/5) + T(7n/10)
-        Deriving T(n/5)
+    Time Complexity: T(n) = T(n/5) + T(7n/10) + O(n)
+        Deriving T(n/5) -> finding the median of each of the n/5 groups
+        Deriving T(7n/10) -> after partitioning, you know that the pivot (median of medians) is greater than or less than at least 30% of the elements, leaving at most 70% of the array to recurse on
+        Deriving O(n) -> dividing into groups of 5, finding the median of each group, and partitioning the array
 
-        Deriving 
+Lecture 6
+Quick Sort 
