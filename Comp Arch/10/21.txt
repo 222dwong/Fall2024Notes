@@ -1,0 +1,58 @@
+Address Computation Instruction
+if function returns an integer, assembly automatically returns value of %eax
+
+foo:                            // function takes 3 parameters
+    pushl %ebp                  // base pointer
+    movl %esp, %ebp
+    movl 16(%ebp), %eax         // reads 3rd parameter and store in eax 
+    imull 12(%ebp), %eax        // multiplies 2nd parameter by eax and store in eax
+    addl 8(%ebp), %eax          // add 1st parameter to eax and store in eax 
+    popl %ebp 
+    ret                         // returns x*y + z
+
+Control Instructions:
+Conditional Branch (if/then, while, for):
+Unconditional Branch 
+
+
+____________________
+cmpl    $0, %eax 
+je      somewhere
+
+
+testl   %eax, %eax      ; compute eax & eax  
+je      somewhere       ; jump when (eax & eax) == 0        if eax == 0, then jump 
+
+
+
+movl    $0, %eax        ; eax = 0
+
+xorl    %eax, %eax      ; eax = eax ^ eax 
+
+x&x = x 
+
+
+____________________
+
+
+
+ebp+4   return address
+ebp+0   old base pointer 
+ebp-4
+ebp-8
+ebp-12  x 
+ebp-16
+ebp-20
+ebp-24
+ebp-28
+ebp-32
+ebp-36  &x
+ebp-40  .LC0
+
+
+pushl %eax 
+
+EAX 10
+ESP 1000 -> 996
+
+    [996-999] -> 10

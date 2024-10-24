@@ -125,3 +125,20 @@ Ex.
 0 0   1      -0.36  -0.07 -0.71
 
 // will not be given inputs that cannot be inverted (ie. linerly dependent matrices)
+
+XW = Y
+
+W = (Xt X)^-1 Xt Y 
+
+A
+B = A^-1
+
+AB 
+BA 
+
+%.12f       // reguar floating point
+%.12e       // scientific notation
+%.12g       // e or f, whichever is better 
+
+
+XW = eY
