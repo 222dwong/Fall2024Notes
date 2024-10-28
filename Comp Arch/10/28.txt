@@ -1,0 +1,73 @@
+movl 12(%ebp), %eax         ; eax = y 
+cmpl %eax, 8(%ebp)          ; compare x : y 
+setg %al                    ; al = (x > y)
+
+    movl 12(%ebp), %eax     ; eax = y 
+    cmpl %eax, 8(%ebp)      ; compare x : y 
+    jg L2
+
+    movl $0, %eax 
+    jmp L3 
+
+L2: 
+    movl $1, %eax 
+
+L3: 
+    ret 
+
+
+int gt(int x, int y)
+{
+    if (x>y) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+{
+    return x > y;
+}
+
+
+____________________
+test:
+    pushl %ebp
+    movl %esp, %ebp
+    pushl %ebx
+    movl 8(%ebp), %edx              ; edx = p1 
+    movl 12(%ebp), %ecx             ; ecx = p2 
+    movl $1, %eax                   ; eax = 1
+    cmpl %ecx, %edx                 ; compare edx : ecx 
+    jge .L3                         ; if >= goto L3 
+.L6:
+    leal (%edx,%ecx), %ebx          ; ebx = edx + ecx 
+    imull %ebx, %eax                ; eax = eax * ebx 
+    addl $1, %edx                   ; edx = edx + 1
+    cmpl %edx, %ecx                 ; compare ecx : edx 
+    jg .L6                          ; if > goto L6 
+.L3:
+    popl %ebx
+    popl %ebp
+    ret
+
+
+int test(int edx, int ecx)
+{
+    int eax = 1;
+
+    while (edx < ecx) {
+        eax *= edx + ecx;
+        edx++;
+    }
+
+    return eax;
+}
+
+    if (!(edx >= ecx)) {                    // simpify to edx < ecx
+        do {
+            int ebx = edx + ecx;
+            eax *= ebx;
+            edx += 1;
+        } while(ecx > edx)
+    }
