@@ -1,0 +1,26 @@
+// solution on how to read from std input
+
+int r;
+double sum = 0;
+double num;
+int count = 0;
+
+r = scanf("%lf", &num);
+while (r == 1) {
+    sum += num;
+    count++;
+    r = scanf("%lf", &num);
+} 
+
+if (r == 0) {
+    printf("Bad input\n");
+    return EXIT_FAILURE;
+}
+
+if (count == 0) {
+    printf("Nothing to average\n");
+    return EXIT_FAILURE;
+}
+
+double avg = sum / count;
+printf("average is %f\n", avg);

@@ -1,0 +1,81 @@
+Karnaugh Maps or K-Maps
+Find adjacent 1s, means that you can simplify and "knock out" a variable
+
+
+  . D D . 
+. 1 1 1   .
+.     1   B
+A   1 1   B 
+A         .
+  . . C C 
+
+___         _ 
+ABC + ABD + ACD
+
+  . D D . 
+. 1 1 1   .
+.   1 1   B
+A     1   B 
+A     1   .
+  . . C C 
+
+_         ___
+AD + CD + ABC
+
+  . D D . 
+.   1 1   .
+.   1 1   B
+A   1 1   B 
+A 1 1 1 1 . 
+  . . C C  
+
+ _
+AB + D
+
+  . D D . 
+.   1   1 .
+. 1 1 1 1 B
+A   1   1 B 
+A 1 1 1 1 .
+  . . C C 
+ _   _    _     _ 
+AB + AB + CD + CD 
+
+  . D D . 
+. 1 1 1 1 .
+.   1 1   B
+A         B 
+A 1   1 1 .
+  . . C C 
+
+__   _    _ 
+BD + AD + BC
+
+
+Don't Care Conditions
+Suppose we know that a disallowed input combo is A=1, B=0
+         __ 
+F = AB + AB 
+         _ 
+G = AB + B 
+
+A B | F H G 
+0 0   1 1 1
+0 1   0 0 0 
+1 0   0 x 1     -> F and G are the same other than for A=1, B=0 BUT simpler formula 
+1 1   1 1 1
+
+Both F and G are appropriate functions for H
+
+
+
+  . D D .
+. 1 x x x .
+. x 1 x x B
+A 0 0 1 x B
+A 0 0 x 1 . 
+  . . C C 
+
+_         ____   _ _            _ _ 
+A + C vs. ABCD + ABCD + ABCD + ABCD
+
