@@ -1,0 +1,6 @@
+Outputs of sequential logic depend on both current and prior values - it has memory
+State: all the information about a circuit to explain its future behavior
+Latches and flip-flops: state elements that store one bit of state
+Synchronous sequential elements: combinational logic followed by a bank of flip-flops 
+
+Bistable Circuits:

@@ -79,3 +79,67 @@ A 0 0 x 1 .
 _         ____   _ _            _ _ 
 A + C vs. ABCD + ABCD + ABCD + ABCD
 
+
+a:
+  . . Y Y
+. 1 0 1 1 .
+. 0 1 1 1 X
+W X X X X X
+W 1 1 X X . 
+  . Z Z . 
+
+             __
+Y + W + XZ + XZ
+
+b:
+  . . Y Y
+. 1 1 1 1 .
+. 1 0 1 0 X
+W X X X X X
+W 1 1 X X . 
+  . Z Z . 
+__        _ 
+YZ + YZ + X 
+
+c:
+  . . Y Y
+. 1 1 1 0 .
+. 1 1 1 1 X
+W X X X X X
+W 1 1 X X . 
+  . Z Z . 
+
+    _ 
+X + Y + Z
+
+d:
+  . . Y Y
+. 1 0 1 1 .
+. 0 1 0 1 X
+W X X X X X
+W 1 0 X X . 
+  . Z Z . 
+
+__    _    _  _ 
+XZ + YZ + XYZ XY
+
+e: 
+  . . Y Y
+. 1 0 0 1 .
+. 0 0 0 1 X
+W X X X X X
+W 1 0 X X . 
+  . Z Z . 
+
+ _   __ 
+YZ + XZ 
+
+g:
+  . . Y Y
+. 0 0 1 1 .
+. 1 1 0 1 X
+W X X X X X
+W 1 1 X X . 
+  . Z Z . 
+     _   _    _ 
+W + YZ + YX + XY 
