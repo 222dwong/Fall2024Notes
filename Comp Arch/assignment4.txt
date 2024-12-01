@@ -1,0 +1,36 @@
+a b c | d 
+
+a,b,c input; d output 
+
+char name[17]
+int r;
+r = fscanf(input_file, "%16s", name);
+
+a b c d x 
+0 1 2 3 4
+
+
+   . TB TB . 
+.  0 0 0 0 .
+.  1 1 1 1 S0
+S1 0 0 0 0 S0
+S1 1 1 1 1 . 
+   . .TA TA  
+
+   __   __
+S1 S0 + S1 S0
+
+
+Requirement: output is 1 if previous 2 inputs were equal
+
+0 0 1 0 1 1 1 0
+0 1 0 0 0 1 1 0
+
+        0   1
+A/0     B   C  
+B/0     D   C       single 0
+D/1     D   C       double 0
+C/0     B   E       single 1
+E/1     B   E       double 1
+
+5 states -> 3 bits 
