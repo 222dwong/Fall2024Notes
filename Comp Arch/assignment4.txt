@@ -34,3 +34,27 @@ C/0     B   E       single 1
 E/1     B   E       double 1
 
 5 states -> 3 bits 
+
+
+INPUT 2 A B
+OUTPUT 2 C S
+AND A B C 
+XOR A B S 
+
+
+inputs: {"a", "b", "c"}
+outputs: {"z"}
+{kind = AND, size = 0, params = ["a", "b", "c"]}
+{kind = AND, size = 0, params = ["a", "c", "y"]}
+{kind = AND, size = 0, params = ["x", "y", "z"]}
+
+row 5
+a   1
+b   0
+c   1
+z   1
+x   0
+y   1
+
+1 0 1 | 1
+
