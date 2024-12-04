@@ -1,0 +1,36 @@
+Max-Flow
+    * while there is an AUGMENTING PATH (want to "undo" back edges)
+    * augment the flow -> FORD FOLKERSON 
+
+MIN-OUTPUT
+    ->
+s   ->   t
+    <-
+    <-
+
+any flow <= any cut 
+
+MAX-FLOW = MIN-CUT 
+
+S = set of vertices you can reach from s in c_f 
+
+    -> c1/c1
+    -> c2/c2
+    <-  0/c3
+    <-  0/c3
+
+Ford-Fulkerson - |F| augmentations
+    Complexity = O(|E||F|)
+
+Edmonds Kap- "shortest" augmenting path -> BFS -> (EV) augmentations 
+    Complexity = O(E^2 * V)
+
+
+Given s and t, find paths that dont take the same edge
+
+    sol: think of capacities = 1
+
+Bipartite Matching Problem:
+Proper Matching Condition:
+    N(S) >= |S|
+
