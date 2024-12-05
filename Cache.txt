@@ -1,0 +1,101 @@
+memory is divided into equal-sized blocks
+    all addresses within a block have the same prefix
+
+    ex: 32-byte blocks, 32-bit addresses
+
+    first 27 bits same for all addresses within a block
+    last 5 bits will be different within a block
+        -> block offset
+
+
+    10010101010100110 10001
+
+
+cache contains multiple "cache lines"
+    each line stores a copy of a block from memory
+
+    also indicates which block it currently contains 
+
+the cache's placement policy determines which lines can 
+    store which blocks
+
+typical: each block belongs to a "set" 
+    each line can only store blocks belonging to a particlar set 
+
+direct-mapped cache
+    each set corresponds to a single line in the cache 
+
+set index: middle bits in address 
+
+    ex. 32-bit addresses, 32-byte blocks, 32 sets 
+
+    0001010101100101010101 00110 10001 
+
+        22-bit tag 
+        5-bit set index 
+        5-bit block off set at the end
+
+    0000000000000000000000 00000 00000 address 0, set 0
+    0000000000000000000000 00000 00001 address 1, set 0 
+    0000000000000000000000 00001 00000 address 32, set 1
+    0000000000000000000001 00000 00000 address 1024, set 0 
+
+
+direct-mapped cache 
+32-bit address
+64KB cache 
+32-byte blocks 
+
+cache size = #sets * #lines/set * #bytes/block 
+
+C = S E B 
+
+C = 2^16 
+S = 2^11 
+E = 2^0 = 1
+B = 32 = 2^5 
+
+b  = 5 (bits in block offset)
+s = 11 bits in set index 
+t = 16 bits in tag 
+
+t + s + b = 32 
+t = 32 - s - b 
+
+2-way associative cache
+64 KiB cache 
+32-byte blocks 
+32-bit address
+
+C = S E B 
+
+C = 2^16 
+S = 2^10
+E = 2^1     2 lines/set 
+B = 2^5     
+
+32 = t + s + b 
+
+t = 17
+s = 10 
+b = 5 
+
+
+
+2-way associative cache 
+32-bit addres 
+16-byte blocks 
+32 KiB cache 
+
+C = S E B 
+
+C = 2^15 
+S = 2^10
+E = 2^1 
+B = 2^4 
+
+32 = t + s + b 
+
+t = 18 
+s = 10
+b = 4
